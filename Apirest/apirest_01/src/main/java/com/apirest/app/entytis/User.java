@@ -3,42 +3,45 @@ package com.apirest.app.entytis;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_usuario")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nombre;
+    private String username;
 
+    private String password;
 
-    private String apellido;
-
-
-    private int edad;
-
-    public String getNombre() {
-        return nombre;
+    public Integer getId() {
+        return id;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getUsername() {
+        return username;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
+
+
+
+
+
+
+
