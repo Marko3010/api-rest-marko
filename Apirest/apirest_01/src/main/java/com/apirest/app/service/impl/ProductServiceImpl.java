@@ -6,6 +6,9 @@ import com.apirest.app.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -27,4 +30,25 @@ public class ProductServiceImpl implements ProductService {
 
         return repository.save(productoNew);
     }
+
+    @Override
+    public List<Product> listarTodosLosProductos() {
+        return repository.findAll();
+    }
+
+
+
+    @Override
+    public Optional<Product> BuscarPorId(Integer id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    public void BorrarId(Integer id) {
+
+        System.out.println("Se borro el usuario con id:" + id);
+        repository.deleteById(id);
+    }
+
+
 }
