@@ -38,6 +38,11 @@ public class ProductoController {
         service.BorrarId(id);
     }
 
+    @PutMapping("buscar/{id}")
+    public Product actualizarProducto(@PathVariable("id") Integer id,@RequestBody Product product){
+        return service.actualizarProductoPorId(id, product);
+    }
+
 }
 
 

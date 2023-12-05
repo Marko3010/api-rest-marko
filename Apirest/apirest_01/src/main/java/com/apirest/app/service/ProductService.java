@@ -16,6 +16,8 @@ public interface ProductService {
 
      public void BorrarId(Integer id);
 
+     public Product actualizarProductoPorId(Integer id, Product product);
+
 
 
 }

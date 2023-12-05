@@ -6,6 +6,7 @@ import com.apirest.app.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.module.ResolutionException;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +49,20 @@ public class ProductServiceImpl implements ProductService {
 
         System.out.println("Se borro el usuario con id:" + id);
         repository.deleteById(id);
+    }
+
+    @Override
+    public Product actualizarProductoPorId(Integer id, Product product) {
+
+        Product result = repository.findById(id).orElseThrow( () -> new ResolutionException("objeto de producto no encontrado" + id));
+
+        result.setName(product.getName());
+        result.setDescription(product.getDescription());
+        result.setPrice(product.getPrice());
+        result.setAmount(product.getAmount());
+        result.setDiscount(product.isDiscount());
+       Product productoNuevo = repository.save(result);
+        return productoNuevo;
     }
 
 

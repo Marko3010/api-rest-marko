@@ -2,12 +2,12 @@ package com.apirest.app.entytis;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "users")
+@Entity  // clase identidad, indica atributos
+@Table(name = "users") // table crea una tabla en la base de datos
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // identificador unico
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // autoincremente en orden, va generar un valor unico
     private Integer id;
 
     private String username;
