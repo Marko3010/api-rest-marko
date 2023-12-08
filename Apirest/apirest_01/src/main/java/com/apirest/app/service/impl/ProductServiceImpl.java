@@ -1,5 +1,6 @@
 package com.apirest.app.service.impl;
 
+import com.apirest.app.entytis.DTO.ProductoDTO;
 import com.apirest.app.entytis.Product;
 import com.apirest.app.repository.ProductRepository;
 import com.apirest.app.service.ProductService;
@@ -17,19 +18,31 @@ public class ProductServiceImpl implements ProductService {
     public ProductRepository repository;
 
     @Override
-    public Product crearProducto(Product product) {
-     //creando nuevo objeto
-        Product productoNew = new Product();
-        //guardando en el nuevo objeto
+    public ProductoDTO crearProducto(ProductoDTO productoDTO) {
+        // convert from DTO to entity
+       Product product = new Product();
 
-        productoNew.setName(product.getName());
-        productoNew.setDescription(product.getDescription());
-        productoNew.setPrice(product.getPrice());
-        productoNew.setAmount(product.getAmount());
-        productoNew.setDiscount(product.isDiscount());
+       product.setName(productoDTO.getName());
+       product.setDescription(productoDTO.getDescription());
+       product.setPrice(productoDTO.getPrice());
+       product.setAmount(productoDTO.getAmount());
+       product.setDiscount(product.isDiscount());
+
+       Product newProduct = repository.save(product);
+
+       //convert entity to DTO
+        ProductoDTO productResponse = new ProductoDTO();
+
+        productResponse.setId(newProduct.getId());
+        productResponse.setDescription(newProduct.getDescription());
+        productResponse.setAmount(newProduct.getAmount());
+        productResponse.setName(newProduct.getName());
+        productResponse.setPrice(newProduct.getPrice());
 
 
-        return repository.save(productoNew);
+       return productResponse;
+
+
     }
 
     @Override

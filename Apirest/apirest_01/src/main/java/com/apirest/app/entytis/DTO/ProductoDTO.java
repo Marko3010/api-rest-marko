@@ -1,21 +1,26 @@
-package com.apirest.app.entytis;
+package com.apirest.app.entytis.DTO;
 
 
-import javax.persistence.*;
 
-@Entity
-@Table( name = "product")
-public class Product {
+import lombok.Getter;
+import lombok.Setter;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+
+@Getter
+@Setter
+public class ProductoDTO {
+
     private Integer id;
 
-    @Column(name= "name_product", length = 50)
+    @NotEmpty // no puede estar vacia, te exige completar la informacion
+    @Size(min = 5, max =50, message = " el name deberia tener mas de 4 caracteres")
     private String name;
 
-    @Column(length = 60)
     private String description;
+
 
     private double price;
 
