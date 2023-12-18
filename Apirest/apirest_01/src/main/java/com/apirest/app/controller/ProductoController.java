@@ -13,8 +13,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/product")
+@RestController // tipo res (JSON)
+@RequestMapping("/api/product") // es la ruta
 public class ProductoController {
 
     @Autowired
@@ -27,13 +27,13 @@ public class ProductoController {
 
 
     @GetMapping
-    public List<Product> listarTodo(){
+    public List<ProductoDTO> listarTodo(){
         return service.listarTodosLosProductos();
 
     }
 
     @GetMapping("/buscar/{id}")
-    public Optional<Product> listarPorId(@PathVariable Integer id){
+    public ProductoDTO listarPorId(@PathVariable Integer id){
         return service.BuscarPorId(id);
 
     }

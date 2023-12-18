@@ -5,11 +5,13 @@ import com.apirest.app.entytis.Product;
 import com.apirest.app.repository.ProductRepository;
 import com.apirest.app.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.lang.module.ResolutionException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -46,15 +48,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> listarTodosLosProductos() {
-        return repository.findAll();
+    public List<ProductoDTO> listarTodosLosProductos() {
+          List<Product> products =  repository.findAll();
+        return products.stream().map(variable -> mapDTO(variable)).collect(Collectors.toList());
+
     }
 
 
-
     @Override
-    public Optional<Product> BuscarPorId(Integer id) {
-        return repository.findById(id);
+    public ProductoDTO BuscarPorId(Integer id) {
+
+        Product product = repository.findById(id).orElseThrow(()-> new RuntimeException("erorr"));
+
+        return mapDTO(product);
     }
 
     @Override
@@ -78,5 +84,22 @@ public class ProductServiceImpl implements ProductService {
         return productoNuevo;
     }
 
+
+    ////convert product a ProductDTO
+
+    private ProductoDTO mapDTO(Product product){
+
+        ProductoDTO productResponse = new ProductoDTO();
+
+        productResponse.setId(product.getId());
+        productResponse.setName(product.getName());
+        productResponse.setDescription(product.getDescription());
+        productResponse.setPrice(product.getPrice());
+        productResponse.setAmount(product.getAmount());
+        productResponse.setDiscount(productResponse.isDiscount());
+
+        return productResponse;
+
+    }
 
 }

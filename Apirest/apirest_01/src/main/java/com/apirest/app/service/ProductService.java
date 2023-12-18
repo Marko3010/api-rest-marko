@@ -11,9 +11,9 @@ public interface ProductService {
 
     public ProductoDTO crearProducto(ProductoDTO productoDTO);
 
-    public List<Product> listarTodosLosProductos();
+    public List<ProductoDTO> listarTodosLosProductos();
 
-     public Optional<Product> BuscarPorId(Integer id);
+     public ProductoDTO BuscarPorId(Integer id);
 
      public void BorrarId(Integer id);
 
